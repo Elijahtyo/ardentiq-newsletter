@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-news"
+version = "0.1.0"
+description = "Twice-weekly UK-weighted AI news digest and LinkedIn drafting pipeline"
+requires-python = ">=3.11"
+dependencies = [
+    "feedparser>=6.0.11",
+    "httpx>=0.27",
+    "beautifulsoup4>=4.12",
+    "trafilatura>=1.12",
+    "pydantic>=2.7",
+    "PyYAML>=6.0",
+    "anthropic>=0.40",
+    "databricks-sql-connector>=3.5",
+    "msal>=1.30",
+    "tzdata>=2024.1",  # zoneinfo data on Windows; harmless on Linux
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ai_news = ["storage/*.sql"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+markers = [
+    "live: hits the network or a real service; excluded by default",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "RET", "PTH", "ARG", "PL"]
+ignore = [
+    "PLR2004",  # magic value comparisons in tests
+    "PLR0913",  # many arguments on pipeline steps
+    "ARG001",   # unused args in test fixtures
+    "PLC0415",  # lazy imports keep the guard and tests free of heavy SDKs
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLR0915", "S101"]

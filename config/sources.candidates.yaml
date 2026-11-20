@@ -1,0 +1,666 @@
+# Candidate sources for Phase 0 audit.
+#
+# Each entry lists one or more candidate feed URLs, best guess first. The audit
+# job (python -m ai_news.jobs.audit_sources) tries them in order, records HTTP
+# status, robots.txt permission, feed type and item counts, and promotes the
+# first URL that parses into config/sources.yaml.
+#
+# Nothing here is assumed good. Entries that fail every candidate are written to
+# sources.yaml with active: false and the reason in notes.
+#
+# content_policy: full | excerpt_only | headline_only
+version: 1
+
+candidates:
+  # ---------------------------------------------------------------- tier 1 UK official
+  - source_id: govuk_dsit
+    name: GOV.UK — DSIT
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=department-for-science-innovation-and-technology
+
+  - source_id: govuk_ai_keyword
+    name: GOV.UK — AI keyword search
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://www.gov.uk/search/news-and-communications.atom?keywords=artificial+intelligence
+
+  - source_id: govuk_cma
+    name: GOV.UK — Competition and Markets Authority
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [business_services]
+    urls:
+      - https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=competition-and-markets-authority
+
+  - source_id: govuk_ico
+    name: GOV.UK — Information Commissioner's Office
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=information-commissioner-s-office
+      - https://ico.org.uk/rss/news
+
+  - source_id: govuk_innovate_uk
+    name: GOV.UK — Innovate UK
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: []
+    urls:
+      - https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=innovate-uk
+
+  - source_id: govuk_ukri
+    name: GOV.UK — UK Research and Innovation
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: []
+    urls:
+      - https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=uk-research-and-innovation
+      - https://www.ukri.org/feed/
+
+  - source_id: govuk_dbt
+    name: GOV.UK — Department for Business and Trade
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [business_services]
+    urls:
+      - https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=department-for-business-and-trade
+
+  - source_id: aisi
+    name: AI Security Institute
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://www.aisi.gov.uk/feed
+      - https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=ai-security-institute
+
+  - source_id: fca
+    name: Financial Conduct Authority
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: [financial_services]
+    urls:
+      - https://www.fca.org.uk/news/rss
+      - https://www.fca.org.uk/news/rss.xml
+
+  - source_id: techuk
+    name: techUK
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [tech_enabled_services]
+    urls:
+      - https://www.techuk.org/feed
+      - https://www.techuk.org/news/rss
+
+  - source_id: ada_lovelace
+    name: Ada Lovelace Institute
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: []
+    urls:
+      - https://www.adalovelaceinstitute.org/feed/
+      - https://www.adalovelaceinstitute.org/rss/
+
+  - source_id: turing
+    name: Alan Turing Institute
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://www.turing.ac.uk/rss.xml
+      - https://www.turing.ac.uk/news/rss
+      - https://www.turing.ac.uk/feed
+
+  - source_id: fsb
+    name: Federation of Small Businesses
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://www.fsb.org.uk/feed
+      - https://www.fsb.org.uk/rss
+
+  - source_id: enterprise_nation
+    name: Enterprise Nation
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://www.enterprisenation.com/feed/
+      - https://www.enterprisenation.com/rss/
+
+  - source_id: bcc
+    name: British Chambers of Commerce
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://www.britishchambers.org.uk/feed/
+      - https://www.britishchambers.org.uk/rss
+
+  # ---------------------------------------------------------------- tier 1 sector
+  - source_id: bank_of_england
+    name: Bank of England
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: [financial_services]
+    urls:
+      - https://www.bankofengland.co.uk/rss/news
+
+  - source_id: uk_finance
+    name: UK Finance
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [financial_services]
+    urls:
+      - https://www.ukfinance.org.uk/rss.xml
+      - https://www.ukfinance.org.uk/feed
+
+  - source_id: finextra
+    name: Finextra
+    type: rss
+    region: global
+    tier: 1
+    uk_priority: 2
+    sectors: [financial_services]
+    urls:
+      - https://www.finextra.com/rss/headlines.aspx
+      - https://www.finextra.com/rss/news.aspx
+
+  - source_id: icaew
+    name: ICAEW
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [professional_services]
+    urls:
+      - https://www.icaew.com/rss
+      - https://www.icaew.com/insights/rss
+
+  - source_id: law_society_gazette
+    name: Law Society Gazette
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [professional_services]
+    urls:
+      - https://www.lawgazette.co.uk/rss
+      - https://www.lawgazette.co.uk/rss.xml
+
+  - source_id: consultancy_uk
+    name: Consultancy.uk
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [professional_services]
+    urls:
+      - https://www.consultancy.uk/rss/news
+      - https://www.consultancy.uk/rss
+
+  - source_id: nhs_england
+    name: NHS England
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [healthcare_services]
+    urls:
+      - https://www.england.nhs.uk/feed/
+
+  - source_id: cqc
+    name: Care Quality Commission
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [healthcare_services]
+    urls:
+      - https://www.cqc.org.uk/rss/news
+      - https://www.cqc.org.uk/news/rss
+
+  - source_id: digital_health
+    name: Digital Health
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [healthcare_services]
+    urls:
+      - https://www.digitalhealth.net/feed/
+
+  - source_id: logistics_uk
+    name: Logistics UK
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [logistics_and_distribution]
+    urls:
+      - https://logistics.org.uk/rss
+      - https://logistics.org.uk/news/rss
+      - https://logistics.org.uk/feed
+
+  - source_id: management_today
+    name: Management Today
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [business_services]
+    urls:
+      - https://www.managementtoday.co.uk/rss
+      - https://www.managementtoday.co.uk/rss/news
+
+  - source_id: accountancy_age
+    name: Accountancy Age
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 1
+    sectors: [professional_services]
+    urls:
+      - https://www.accountancyage.com/feed/
+
+  # ---------------------------------------------------------------- tier 2 news
+  - source_id: bbc_technology
+    name: BBC Technology
+    type: rss
+    region: uk
+    tier: 2
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://feeds.bbci.co.uk/news/technology/rss.xml
+
+  - source_id: guardian_technology
+    name: The Guardian — Technology
+    type: rss
+    region: uk
+    tier: 2
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://www.theguardian.com/uk/technology/rss
+      - https://www.theguardian.com/technology/rss
+
+  - source_id: sky_technology
+    name: Sky News — Technology
+    type: rss
+    region: uk
+    tier: 2
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://feeds.skynews.com/feeds/rss/technology.xml
+
+  - source_id: city_am
+    name: City AM
+    type: rss
+    region: uk
+    tier: 2
+    uk_priority: 3
+    sectors: []
+    urls:
+      - https://www.cityam.com/feed/
+
+  - source_id: uktn
+    name: UKTN
+    type: rss
+    region: uk
+    tier: 2
+    uk_priority: 3
+    sectors: [tech_enabled_services]
+    urls:
+      - https://www.uktech.news/feed
+      - https://www.uktech.news/feed/
+
+  - source_id: computer_weekly
+    name: Computer Weekly
+    type: rss
+    region: uk
+    tier: 2
+    uk_priority: 2
+    sectors: [tech_enabled_services]
+    urls:
+      - https://www.computerweekly.com/rss/All-Computer-Weekly-content.xml
+
+  - source_id: the_register
+    name: The Register
+    type: rss
+    region: uk
+    tier: 2
+    uk_priority: 2
+    sectors: []
+    urls:
+      - https://www.theregister.com/headlines.atom
+
+  - source_id: tech_monitor
+    name: Tech Monitor
+    type: rss
+    region: uk
+    tier: 2
+    uk_priority: 2
+    sectors: []
+    urls:
+      - https://techmonitor.ai/feed
+      - https://techmonitor.ai/feed/
+
+  - source_id: mit_technology_review
+    name: MIT Technology Review
+    type: rss
+    region: global
+    tier: 2
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://www.technologyreview.com/feed/
+
+  - source_id: techcrunch
+    name: TechCrunch
+    type: rss
+    region: global
+    tier: 2
+    uk_priority: 1
+    sectors: [tech_enabled_services]
+    urls:
+      - https://techcrunch.com/feed/
+
+  - source_id: the_verge
+    name: The Verge
+    type: rss
+    region: global
+    tier: 2
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://www.theverge.com/rss/index.xml
+
+  - source_id: ars_technica
+    name: Ars Technica
+    type: rss
+    region: global
+    tier: 2
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://feeds.arstechnica.com/arstechnica/index
+
+  - source_id: venturebeat
+    name: VentureBeat
+    type: rss
+    region: global
+    tier: 2
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://venturebeat.com/feed/
+
+  - source_id: reuters_technology
+    name: Reuters — Technology
+    type: rss
+    region: global
+    tier: 2
+    uk_priority: 1
+    sectors: []
+    content_policy: headline_only
+    urls:
+      - https://www.reutersagency.com/feed/?best-topics=tech&post_type=best
+
+  - source_id: financial_times
+    name: Financial Times
+    type: rss
+    region: global
+    tier: 2
+    uk_priority: 2
+    sectors: [financial_services]
+    content_policy: headline_only
+    urls:
+      - https://www.ft.com/rss/home
+      - https://www.ft.com/technology?format=rss
+
+  # ---------------------------------------------------------------- tier 3 labs and newsletters
+  - source_id: anthropic_news
+    name: Anthropic
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://www.anthropic.com/rss.xml
+      - https://www.anthropic.com/news/rss.xml
+      - https://www.anthropic.com/feed.xml
+
+  - source_id: openai_news
+    name: OpenAI
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://openai.com/news/rss.xml
+      - https://openai.com/blog/rss.xml
+
+  - source_id: deepmind
+    name: Google DeepMind
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 2
+    sectors: []
+    urls:
+      - https://deepmind.google/blog/rss.xml
+      - https://deepmind.google/discover/blog/rss.xml
+      - https://deepmind.com/blog/feed/basic/
+
+  - source_id: microsoft_ai
+    name: Microsoft blog (AI section retired, HTTP 410)
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://blogs.microsoft.com/feed/
+
+  - source_id: meta_ai
+    name: Meta AI
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://ai.meta.com/blog/rss/
+      - https://engineering.fb.com/feed/
+
+  - source_id: import_ai
+    name: Import AI
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://importai.substack.com/feed
+
+  - source_id: the_batch
+    name: The Batch
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://www.deeplearning.ai/the-batch/feed/
+
+  - source_id: tldr_ai
+    name: TLDR AI
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://tldr.tech/api/rss/ai
+
+  - source_id: bens_bites
+    name: Ben's Bites
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://www.bensbites.com/feed
+
+  - source_id: last_week_in_ai
+    name: Last Week in AI
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://lastweekin.ai/feed
+
+  - source_id: exponential_view
+    name: Exponential View
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://www.exponentialview.co/feed
+
+  # ---------------------------------------------------------------- added in Phase 0 audit
+  # Gap-fillers for sectors whose named tier-1 feeds are dead or blocked.
+  - source_id: rundown_ai
+    name: The Rundown AI
+    type: rss
+    region: global
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    urls:
+      - https://www.therundown.ai/feed
+
+  - source_id: logistics_manager
+    name: Logistics Manager
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [logistics_and_distribution]
+    notes: Replaces Logistics UK, whose feed is empty.
+    urls:
+      - https://www.logisticsmanager.com/feed/
+
+  - source_id: htn
+    name: HTN Health Tech News
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [healthcare_services]
+    notes: Replaces Digital Health (403) and CQC (no feed).
+    urls:
+      - https://htn.co.uk/feed/
+
+  - source_id: legal_cheek
+    name: Legal Cheek
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 2
+    sectors: [professional_services]
+    notes: Replaces Law Society Gazette, which no longer publishes a feed.
+    urls:
+      - https://www.legalcheek.com/feed/
+
+  - source_id: smallbusiness_uk
+    name: SmallBusiness.co.uk
+    type: rss
+    region: uk
+    tier: 1
+    uk_priority: 3
+    sectors: [business_services]
+    notes: SME-focused; partly covers FSB and Enterprise Nation, which have no feeds.
+    urls:
+      - https://smallbusiness.co.uk/feed/
+
+  - source_id: sifted
+    name: Sifted
+    type: rss
+    region: uk
+    tier: 2
+    uk_priority: 2
+    sectors: [tech_enabled_services]
+    notes: European startup news, London-based. Partly covers UKTN (robots-disallowed).
+    urls:
+      - https://sifted.eu/feed
+
+  - source_id: bbc_business
+    name: BBC Business
+    type: rss
+    region: uk
+    tier: 2
+    uk_priority: 3
+    sectors: [business_services]
+    urls:
+      - https://feeds.bbci.co.uk/news/business/rss.xml
+
+  # ---------------------------------------------------------------- mailbox
+  - source_id: newsletter_inbox
+    name: Microsoft 365 newsletter inbox
+    type: email
+    region: uk
+    tier: 3
+    uk_priority: 1
+    sectors: []
+    notes: Shared mailbox read with Microsoft Graph. Configure the address in Phase 1.

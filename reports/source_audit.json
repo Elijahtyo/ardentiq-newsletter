@@ -1,0 +1,991 @@
+{
+  "generated": "2026-11-20T00:27:01+00:00",
+  "results": [
+    {
+      "source_id": "govuk_dsit",
+      "verified": true,
+      "chosen_url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=department-for-science-innovation-and-technology",
+      "checks": [
+        {
+          "url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=department-for-science-innovation-and-technology",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "govuk_ai_keyword",
+      "verified": true,
+      "chosen_url": "https://www.gov.uk/search/news-and-communications.atom?keywords=artificial+intelligence",
+      "checks": [
+        {
+          "url": "https://www.gov.uk/search/news-and-communications.atom?keywords=artificial+intelligence",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "govuk_cma",
+      "verified": true,
+      "chosen_url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=competition-and-markets-authority",
+      "checks": [
+        {
+          "url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=competition-and-markets-authority",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "govuk_ico",
+      "verified": true,
+      "chosen_url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=information-commissioner-s-office",
+      "checks": [
+        {
+          "url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=information-commissioner-s-office",
+          "status": 200,
+          "entries": 14,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "govuk_innovate_uk",
+      "verified": true,
+      "chosen_url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=innovate-uk",
+      "checks": [
+        {
+          "url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=innovate-uk",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "govuk_ukri",
+      "verified": true,
+      "chosen_url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=uk-research-and-innovation",
+      "checks": [
+        {
+          "url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=uk-research-and-innovation",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "govuk_dbt",
+      "verified": true,
+      "chosen_url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=department-for-business-and-trade",
+      "checks": [
+        {
+          "url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=department-for-business-and-trade",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "aisi",
+      "verified": true,
+      "chosen_url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=ai-security-institute",
+      "checks": [
+        {
+          "url": "https://www.aisi.gov.uk/feed",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=ai-security-institute",
+          "status": 200,
+          "entries": 11,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "fca",
+      "verified": true,
+      "chosen_url": "https://www.fca.org.uk/news/rss",
+      "checks": [
+        {
+          "url": "https://www.fca.org.uk/news/rss",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "techuk",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.techuk.org/feed",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.techuk.org/news/rss",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "ada_lovelace",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.adalovelaceinstitute.org/feed/",
+          "status": 200,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": "no usable entries"
+        },
+        {
+          "url": "https://www.adalovelaceinstitute.org/rss/",
+          "status": 200,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": "no usable entries"
+        }
+      ]
+    },
+    {
+      "source_id": "turing",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.turing.ac.uk/rss.xml",
+          "status": 403,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.turing.ac.uk/news/rss",
+          "status": 403,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.turing.ac.uk/feed",
+          "status": 403,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "fsb",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.fsb.org.uk/feed",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.fsb.org.uk/rss",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "enterprise_nation",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.enterprisenation.com/feed/",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.enterprisenation.com/rss/",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "bcc",
+      "verified": true,
+      "chosen_url": "https://www.britishchambers.org.uk/feed/",
+      "checks": [
+        {
+          "url": "https://www.britishchambers.org.uk/feed/",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "bank_of_england",
+      "verified": true,
+      "chosen_url": "https://www.bankofengland.co.uk/rss/news",
+      "checks": [
+        {
+          "url": "https://www.bankofengland.co.uk/rss/news",
+          "status": 200,
+          "entries": 50,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "uk_finance",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.ukfinance.org.uk/rss.xml",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": "stale: newest item 2021-11-01"
+        },
+        {
+          "url": "https://www.ukfinance.org.uk/feed",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "finextra",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.finextra.com/rss/headlines.aspx",
+          "status": null,
+          "entries": 0,
+          "robots_allowed": false,
+          "error": "blocked (robots.txt parsed)"
+        },
+        {
+          "url": "https://www.finextra.com/rss/news.aspx",
+          "status": null,
+          "entries": 0,
+          "robots_allowed": false,
+          "error": "blocked (robots.txt parsed)"
+        }
+      ]
+    },
+    {
+      "source_id": "icaew",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.icaew.com/rss",
+          "status": 200,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": "not a feed: <unknown>:22:146: not well-formed (invalid token)"
+        },
+        {
+          "url": "https://www.icaew.com/insights/rss",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "law_society_gazette",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.lawgazette.co.uk/rss",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.lawgazette.co.uk/rss.xml",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "consultancy_uk",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.consultancy.uk/rss/news",
+          "status": 200,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": "no usable entries"
+        },
+        {
+          "url": "https://www.consultancy.uk/rss",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "nhs_england",
+      "verified": true,
+      "chosen_url": "https://www.england.nhs.uk/feed/",
+      "checks": [
+        {
+          "url": "https://www.england.nhs.uk/feed/",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "cqc",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.cqc.org.uk/rss/news",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.cqc.org.uk/news/rss",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "digital_health",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.digitalhealth.net/feed/",
+          "status": 403,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "logistics_uk",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://logistics.org.uk/rss",
+          "status": 200,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": "no usable entries"
+        },
+        {
+          "url": "https://logistics.org.uk/news/rss",
+          "status": 200,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": "no usable entries"
+        },
+        {
+          "url": "https://logistics.org.uk/feed",
+          "status": 200,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": "no usable entries"
+        }
+      ]
+    },
+    {
+      "source_id": "management_today",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.managementtoday.co.uk/rss",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.managementtoday.co.uk/rss/news",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "accountancy_age",
+      "verified": true,
+      "chosen_url": "https://www.accountancyage.com/feed/",
+      "checks": [
+        {
+          "url": "https://www.accountancyage.com/feed/",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "bbc_technology",
+      "verified": true,
+      "chosen_url": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "checks": [
+        {
+          "url": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+          "status": 200,
+          "entries": 21,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "guardian_technology",
+      "verified": true,
+      "chosen_url": "https://www.theguardian.com/uk/technology/rss",
+      "checks": [
+        {
+          "url": "https://www.theguardian.com/uk/technology/rss",
+          "status": 200,
+          "entries": 32,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "sky_technology",
+      "verified": true,
+      "chosen_url": "https://feeds.skynews.com/feeds/rss/technology.xml",
+      "checks": [
+        {
+          "url": "https://feeds.skynews.com/feeds/rss/technology.xml",
+          "status": 200,
+          "entries": 6,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "city_am",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.cityam.com/feed/",
+          "status": null,
+          "entries": 0,
+          "robots_allowed": false,
+          "error": "blocked (robots.txt parsed)"
+        }
+      ]
+    },
+    {
+      "source_id": "uktn",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.uktech.news/feed",
+          "status": null,
+          "entries": 0,
+          "robots_allowed": false,
+          "error": "blocked (robots.txt parsed)"
+        },
+        {
+          "url": "https://www.uktech.news/feed/",
+          "status": null,
+          "entries": 0,
+          "robots_allowed": false,
+          "error": "blocked (robots.txt parsed)"
+        }
+      ]
+    },
+    {
+      "source_id": "computer_weekly",
+      "verified": true,
+      "chosen_url": "https://www.computerweekly.com/rss/All-Computer-Weekly-content.xml",
+      "checks": [
+        {
+          "url": "https://www.computerweekly.com/rss/All-Computer-Weekly-content.xml",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "the_register",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.theregister.com/headlines.atom",
+          "status": null,
+          "entries": 0,
+          "robots_allowed": false,
+          "error": "blocked (robots.txt parsed)"
+        }
+      ]
+    },
+    {
+      "source_id": "tech_monitor",
+      "verified": true,
+      "chosen_url": "https://techmonitor.ai/feed",
+      "checks": [
+        {
+          "url": "https://techmonitor.ai/feed",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "mit_technology_review",
+      "verified": true,
+      "chosen_url": "https://www.technologyreview.com/feed/",
+      "checks": [
+        {
+          "url": "https://www.technologyreview.com/feed/",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "techcrunch",
+      "verified": true,
+      "chosen_url": "https://techcrunch.com/feed/",
+      "checks": [
+        {
+          "url": "https://techcrunch.com/feed/",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "the_verge",
+      "verified": true,
+      "chosen_url": "https://www.theverge.com/rss/index.xml",
+      "checks": [
+        {
+          "url": "https://www.theverge.com/rss/index.xml",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "ars_technica",
+      "verified": true,
+      "chosen_url": "https://feeds.arstechnica.com/arstechnica/index",
+      "checks": [
+        {
+          "url": "https://feeds.arstechnica.com/arstechnica/index",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "venturebeat",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://venturebeat.com/feed/",
+          "status": 429,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "reuters_technology",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.reutersagency.com/feed/?best-topics=tech&post_type=best",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "financial_times",
+      "verified": true,
+      "chosen_url": "https://www.ft.com/rss/home",
+      "checks": [
+        {
+          "url": "https://www.ft.com/rss/home",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "anthropic_news",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.anthropic.com/rss.xml",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.anthropic.com/news/rss.xml",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://www.anthropic.com/feed.xml",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "openai_news",
+      "verified": true,
+      "chosen_url": "https://openai.com/news/rss.xml",
+      "checks": [
+        {
+          "url": "https://openai.com/news/rss.xml",
+          "status": 200,
+          "entries": 1418,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "deepmind",
+      "verified": true,
+      "chosen_url": "https://deepmind.google/blog/rss.xml",
+      "checks": [
+        {
+          "url": "https://deepmind.google/blog/rss.xml",
+          "status": 200,
+          "entries": 100,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "microsoft_ai",
+      "verified": true,
+      "chosen_url": "https://blogs.microsoft.com/feed/",
+      "checks": [
+        {
+          "url": "https://blogs.microsoft.com/feed/",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "meta_ai",
+      "verified": true,
+      "chosen_url": "https://engineering.fb.com/feed/",
+      "checks": [
+        {
+          "url": "https://ai.meta.com/blog/rss/",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        },
+        {
+          "url": "https://engineering.fb.com/feed/",
+          "status": 200,
+          "entries": 9,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "import_ai",
+      "verified": true,
+      "chosen_url": "https://importai.substack.com/feed",
+      "checks": [
+        {
+          "url": "https://importai.substack.com/feed",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "the_batch",
+      "verified": false,
+      "chosen_url": null,
+      "checks": [
+        {
+          "url": "https://www.deeplearning.ai/the-batch/feed/",
+          "status": 404,
+          "entries": 0,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "tldr_ai",
+      "verified": true,
+      "chosen_url": "https://tldr.tech/api/rss/ai",
+      "checks": [
+        {
+          "url": "https://tldr.tech/api/rss/ai",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "bens_bites",
+      "verified": true,
+      "chosen_url": "https://www.bensbites.com/feed",
+      "checks": [
+        {
+          "url": "https://www.bensbites.com/feed",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "last_week_in_ai",
+      "verified": true,
+      "chosen_url": "https://lastweekin.ai/feed",
+      "checks": [
+        {
+          "url": "https://lastweekin.ai/feed",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "exponential_view",
+      "verified": true,
+      "chosen_url": "https://www.exponentialview.co/feed",
+      "checks": [
+        {
+          "url": "https://www.exponentialview.co/feed",
+          "status": 200,
+          "entries": 20,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "rundown_ai",
+      "verified": true,
+      "chosen_url": "https://www.therundown.ai/feed",
+      "checks": [
+        {
+          "url": "https://www.therundown.ai/feed",
+          "status": 200,
+          "entries": 50,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "logistics_manager",
+      "verified": true,
+      "chosen_url": "https://www.logisticsmanager.com/feed/",
+      "checks": [
+        {
+          "url": "https://www.logisticsmanager.com/feed/",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "htn",
+      "verified": true,
+      "chosen_url": "https://htn.co.uk/feed/",
+      "checks": [
+        {
+          "url": "https://htn.co.uk/feed/",
+          "status": 200,
+          "entries": 10,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "legal_cheek",
+      "verified": true,
+      "chosen_url": "https://www.legalcheek.com/feed/",
+      "checks": [
+        {
+          "url": "https://www.legalcheek.com/feed/",
+          "status": 200,
+          "entries": 21,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "smallbusiness_uk",
+      "verified": true,
+      "chosen_url": "https://smallbusiness.co.uk/feed/",
+      "checks": [
+        {
+          "url": "https://smallbusiness.co.uk/feed/",
+          "status": 200,
+          "entries": 12,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "sifted",
+      "verified": true,
+      "chosen_url": "https://sifted.eu/feed",
+      "checks": [
+        {
+          "url": "https://sifted.eu/feed",
+          "status": 200,
+          "entries": 24,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "bbc_business",
+      "verified": true,
+      "chosen_url": "https://feeds.bbci.co.uk/news/business/rss.xml",
+      "checks": [
+        {
+          "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
+          "status": 200,
+          "entries": 53,
+          "robots_allowed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "source_id": "newsletter_inbox",
+      "verified": false,
+      "chosen_url": null,
+      "checks": []
+    }
+  ]
+}

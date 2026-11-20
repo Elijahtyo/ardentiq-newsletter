@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Sample feed</title>
+    <link>https://example.org/</link>
+    <description>Recorded fixture</description>
+    <item>
+      <title>UK regulator publishes AI guidance for small firms</title>
+      <link>https://example.org/news/ai-guidance?utm_source=rss&amp;utm_medium=feed</link>
+      <pubDate>Thu, 19 Nov 2026 10:00:00 +0000</pubDate>
+      <description>Short excerpt about the guidance.</description>
+    </item>
+    <item>
+      <title>New model released</title>
+      <link>https://example.org/news/new-model</link>
+      <pubDate>Wed, 18 Nov 2026 15:30:00 +0000</pubDate>
+      <description>Another excerpt.</description>
+    </item>
+  </channel>
+</rss>

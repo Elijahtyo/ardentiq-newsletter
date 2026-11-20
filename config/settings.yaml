@@ -1,0 +1,44 @@
+# Non-secret configuration. Secrets are referenced as ${ENV_VAR} and supplied by
+# GitHub Actions secrets at run time. Never put a token in this file.
+
+databricks:
+  host: ${DATABRICKS_HOST}
+  http_path: ${DATABRICKS_HTTP_PATH}
+  catalog: ${DATABRICKS_CATALOG:-main}
+  schema: ${DATABRICKS_SCHEMA:-ai_news}
+  token_env: DATABRICKS_TOKEN
+
+# Model ids live here, not in code. Change a model without touching Python.
+models:
+  filtering: claude-haiku-5-5
+  summarising: claude-sonnet-5-5
+  digest: claude-sonnet-5-5
+  drafting: claude-sonnet-5-5
+  rubric: claude-haiku-5-5
+
+schedule:
+  timezone: Europe/London
+  target_hour: 9
+  target_minute: 0
+  guard_window_minutes: 60
+  run_days: [mon, thu]
+
+pipeline:
+  digest_min_items: 10
+  digest_max_items: 12
+  near_duplicate_threshold: 0.82
+  max_sectors_per_item: 2
+
+linkedin:
+  publishing_enabled: false
+  organisation_urn: ${LINKEDIN_ORG_URN:-}
+  api_version: "202411"
+  drafts_per_digest: 3
+  hashtags_max: 3
+
+http:
+  timeout_seconds: 30
+  max_retries: 3
+  user_agent: "ai-news-pipeline/0.1"
+
+sources_file: config/sources.yaml
