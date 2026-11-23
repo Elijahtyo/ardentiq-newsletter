@@ -4,7 +4,7 @@
 -- holding only ";".
 
 CREATE SCHEMA IF NOT EXISTS {schema}
-COMMENT 'UK-weighted AI news digest and LinkedIn drafting pipeline'
+COMMENT 'UK-weighted AI news digests for senior staff. LinkedIn drafts live outside Databricks (see linkedin/)'
 ;
 CREATE TABLE IF NOT EXISTS {schema}.sources (
   source_id   STRING        NOT NULL COMMENT 'Stable slug, primary key',
@@ -69,37 +69,6 @@ CREATE TABLE IF NOT EXISTS {schema}.digest_items (
   rank       INT    COMMENT 'Position within the digest, 1 = top'
 ) USING DELTA
 COMMENT 'Which clusters appear in which digest, and where'
-;
-CREATE TABLE IF NOT EXISTS {schema}.linkedin_examples (
-  example_id  STRING    NOT NULL COMMENT 'Primary key, derived from source_file',
-  post_text   STRING    COMMENT 'Full text of a past post',
-  format      STRING    COMMENT 'news_so_what, practical_tip, myth_vs_reality or question',
-  sector      STRING    COMMENT 'Focus sector, or null for cross-sector',
-  source_file STRING    COMMENT 'Path under prompts/examples/',
-  added_at    TIMESTAMP COMMENT 'When loaded (UTC)',
-  notes       STRING    COMMENT 'Free-text notes'
-) USING DELTA
-COMMENT 'Seed posts used as few-shot examples'
-;
-CREATE TABLE IF NOT EXISTS {schema}.linkedin_drafts (
-  draft_id           STRING        NOT NULL COMMENT 'Primary key',
-  digest_id          STRING        COMMENT 'FK to digests',
-  status             STRING        COMMENT 'draft, approved, rejected or published',
-  post_text          STRING        COMMENT 'Text as generated',
-  edited_text        STRING        COMMENT 'Text after human edits; feeds the voice tuning loop',
-  reject_reason      STRING        COMMENT 'Why it was rejected',
-  sector             STRING        COMMENT 'Target sector, or null for cross-sector',
-  source_cluster_ids ARRAY<STRING> COMMENT 'Digest clusters the post is grounded in',
-  prompt_version     STRING        COMMENT 'Version of the prompt files used',
-  model              STRING        COMMENT 'Model id that wrote the draft',
-  impressions        BIGINT        COMMENT 'From LinkedIn once published',
-  reactions          BIGINT        COMMENT 'From LinkedIn once published',
-  created_at         TIMESTAMP     COMMENT 'UTC',
-  approved_at        TIMESTAMP     COMMENT 'UTC',
-  published_at       TIMESTAMP     COMMENT 'UTC',
-  post_urn           STRING        COMMENT 'LinkedIn post URN once published'
-) USING DELTA
-COMMENT 'LinkedIn drafts and their approval state. Only approved drafts are ever published'
 ;
 CREATE TABLE IF NOT EXISTS {schema}.pipeline_runs (
   run_id        STRING    NOT NULL COMMENT 'Primary key',

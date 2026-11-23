@@ -16,7 +16,7 @@ Approval is slow, so submit early. The pipeline doesn't need it until Phase 5. U
 | Scope | Why |
 | --- | --- |
 | `w_organization_social` | Create posts as the organisation (Phase 5 publisher) |
-| `r_organization_social` | **Added beyond the brief.** Read your own organisation's posts and their social actions, so `impressions` and `reactions` in `linkedin_drafts` can be filled in. Without it those columns stay empty. Post impressions may also need the organisation share statistics endpoint **(confirm)**. |
+| `r_organization_social` | **Added beyond the brief.** Read your own organisation's posts and their social actions, so the `impressions` and `reactions` fields in the local drafts store (`linkedin/drafts/`) can be filled in. Without it those stay empty. Post impressions may also need the organisation share statistics endpoint **(confirm)**. |
 
 No scraping and no browser automation. Every post goes through `POST /rest/posts`, with `author = urn:li:organization:<id>`.
 

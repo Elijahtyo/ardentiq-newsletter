@@ -35,6 +35,9 @@ linkedin:
   api_version: "202411"
   drafts_per_digest: 3
   hashtags_max: 3
+  # Drafts and their approval state live in the repository, never in Delta.
+  drafts_dir: linkedin/drafts
+  published_file: linkedin/published.jsonl
 
 http:
   timeout_seconds: 30

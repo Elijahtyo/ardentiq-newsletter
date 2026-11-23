@@ -109,6 +109,8 @@ class PipelineSettings(BaseModel):
 
 
 class LinkedInSettings(BaseModel):
+    """LinkedIn branch settings. Drafts are files, never Databricks rows."""
+
     model_config = ConfigDict(extra="forbid")
 
     publishing_enabled: bool = False
@@ -116,6 +118,8 @@ class LinkedInSettings(BaseModel):
     api_version: str = "202411"
     drafts_per_digest: int = Field(default=3, ge=1, le=5)
     hashtags_max: int = Field(default=3, ge=0, le=5)
+    drafts_dir: str = "linkedin/drafts"
+    published_file: str = "linkedin/published.jsonl"
 
 
 class HttpSettings(BaseModel):

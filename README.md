@@ -1,6 +1,15 @@
 # AI news pipeline
 
-Twice-weekly, UK-weighted AI news digest written to Databricks Delta tables. LinkedIn drafts for UK SMEs come from those digests. Runs on GitHub Actions.
+Twice-weekly, UK-weighted AI news digest written to Databricks Delta tables, plus LinkedIn drafts for UK SMEs built from the same news calls. Runs on GitHub Actions.
+
+**Two branches, one source.** The news calls feed two separate consumers that share no storage:
+
+| Branch | Output | Storage |
+| --- | --- | --- |
+| Senior-staff digest | `digests`, `digest_items`, enriched items | Databricks Delta |
+| LinkedIn drafts | `hook`, `body`, hashtags, approval state | Files under `linkedin/` — never Databricks |
+
+The drafting job reads the digest produced by the same workflow run, so the LinkedIn branch neither writes to nor reads from Databricks. That keeps posting content and approval history out of the Free Edition workspace. It does **not** by itself change the Free Edition licence position: that edition may not be used commercially, so the digest side still needs a paid workspace or trial before go-live.
 
 **Status: Phase 0.** Repo skeleton, source audit, Databricks schema and smoke write, secret checks, schedule guard. Setup steps: [docs/SETUP.md](docs/SETUP.md). LinkedIn application: [docs/LINKEDIN_APPLICATION.md](docs/LINKEDIN_APPLICATION.md). Source audit results: [docs/SOURCE_AUDIT.md](docs/SOURCE_AUDIT.md).
 
@@ -34,7 +43,8 @@ python -m venv .venv
 
 ```
 config/      settings.yaml (no secrets), sources.yaml (generated), sources.candidates.yaml
-src/ai_news/ config, models, sources, logging_setup, jobs/, storage/
+src/ai_news/ config, models, sources, logging_setup, jobs/, storage/, linkedin/
+linkedin/    drafts/ (one JSON file per digest) and published.jsonl — the LinkedIn branch's store
 tests/       mirrors src; fixtures/ holds recorded feeds
 docs/        setup, LinkedIn application, source audit
 ```

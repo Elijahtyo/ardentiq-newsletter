@@ -29,7 +29,7 @@ No Delta Sharing (open sharing) identifier is needed. The pipeline writes throug
 2. **Token.** Go to User settings, then Developer, then Access tokens, and generate a token with a 90-day lifetime. Store it as secret `DATABRICKS_TOKEN`. Put the expiry date in your calendar.
 3. **Catalog. Please check this one.** Free Edition workspaces usually come with a catalog called `workspace`, not `main`. In Catalog Explorer, see which catalog you can create schemas in. If it isn't `main`, add a repository **variable** (not a secret) `DATABRICKS_CATALOG` with that name. The schema defaults to `ai_news`.
 
-Check: the `phase0` workflow's "Databricks test write" step creates the 8 tables and MERGEs one row into `pipeline_runs`.
+Check: the `phase0` workflow's "Databricks test write" step creates the 6 news tables and MERGEs one row into `pipeline_runs`. LinkedIn drafts are not created there: they live in the repository under `linkedin/drafts/` (see [linkedin/README.md](../linkedin/README.md)).
 
 > Free Edition limits outbound traffic *from* its own compute. This pipeline goes the other way: GitHub Actions connects *in* to the SQL warehouse over HTTPS. That should work. If it doesn't, the smoke step fails, and the brief says to stop and report at that point.
 

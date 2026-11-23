@@ -17,14 +17,15 @@ from ai_news.config import ConfigError, DatabricksSettings
 
 _IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
+# The news/digest side only. LinkedIn drafts are deliberately not stored in
+# Databricks: they live under linkedin/ in the repository, so no posting content
+# or approval history passes through the Free Edition account.
 TABLES = (
     "sources",
     "raw_items",
     "items_enriched",
     "digests",
     "digest_items",
-    "linkedin_examples",
-    "linkedin_drafts",
     "pipeline_runs",
 )
 

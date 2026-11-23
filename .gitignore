@@ -25,3 +25,6 @@ reports/local/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# graphify build output (regenerated)
+graphify-out/

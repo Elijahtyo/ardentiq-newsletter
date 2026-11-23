@@ -162,38 +162,6 @@ class Summary(BaseModel):
     claims: list[Claim] = Field(default_factory=list)
 
 
-class Draft(BaseModel):
-    """LinkedIn draft model output."""
-
-    model_config = ConfigDict(extra="forbid")
-
-    hook: str
-    body: str
-    hashtags: list[str] = Field(default_factory=list)
-    sector: Sector | None = None
-    source_cluster_ids: list[str]
-    self_check: str
-
-    @field_validator("hashtags")
-    @classmethod
-    def _hashtags(cls, tags: list[str]) -> list[str]:
-        cleaned: list[str] = []
-        for raw in tags:
-            tag = raw.strip().lstrip("#")
-            if tag and not any(ch.isspace() for ch in tag):
-                cleaned.append(tag)
-            elif tag:
-                raise ValueError(f"hashtag may not contain spaces: {tag!r}")
-        if len(cleaned) > 3:
-            raise ValueError("at most 3 hashtags")
-        return cleaned
-
-    @property
-    def post_text(self) -> str:
-        tag_line = " ".join(f"#{tag}" for tag in self.hashtags)
-        return "\n\n".join(part for part in (self.hook, self.body, tag_line) if part)
-
-
 class RawItem(BaseModel):
     """One fetched item, before dedupe/enrichment."""
 

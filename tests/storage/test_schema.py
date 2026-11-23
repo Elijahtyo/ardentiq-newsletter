@@ -14,6 +14,14 @@ def test_all_tables_created_with_comments() -> None:
     pattern = re.compile(r"TABLE IF NOT EXISTS main\.ai_news\.(\w+)")
     created = {m.group(1) for s in statements if (m := pattern.search(s))}
     assert created == set(TABLES)
+    assert created == {
+        "sources",
+        "raw_items",
+        "items_enriched",
+        "digests",
+        "digest_items",
+        "pipeline_runs",
+    }
     for statement in statements:
         assert "COMMENT" in statement
         if "CREATE TABLE" not in statement:
@@ -21,6 +29,12 @@ def test_all_tables_created_with_comments() -> None:
         columns = statement.split("(", 1)[1].rsplit(")", 1)[0]
         for line in filter(str.strip, columns.splitlines()):
             assert "COMMENT" in line, f"column without COMMENT: {line.strip()}"
+
+
+def test_linkedin_content_is_never_stored_in_databricks() -> None:
+    statements = ddl_statements(load_settings(environ=ENV).databricks)
+    creates = [s for s in statements if "CREATE TABLE" in s]
+    assert not any("linkedin" in statement.lower() for statement in creates)
 
 
 def test_catalog_is_configurable() -> None:
