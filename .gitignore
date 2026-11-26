@@ -28,3 +28,6 @@ desktop.ini
 
 # graphify build output (regenerated)
 graphify-out/
+
+# Rendered briefings (regenerated; sent by email)
+briefing/out/

@@ -5,10 +5,11 @@
 
 Live checks are read-only and cost nothing:
   * Anthropic: models.retrieve for every configured model id (free, no tokens)
-  * Databricks: SELECT 1 on the SQL warehouse
   * Microsoft Graph: client-credentials token, then read one message id from the
     configured mailbox. If MS_POLICY_PROBE_MAILBOX is set, also confirm that a
     different mailbox is DENIED, proving the access policy restricts the app.
+  * Briefing: parse the client list; report how many addresses it holds, never
+    the addresses themselves.
   * LinkedIn: skipped until the Community Management API is approved.
 """
 
@@ -36,14 +37,13 @@ class Secret:
 
 SECRETS: tuple[Secret, ...] = (
     Secret("ANTHROPIC_API_KEY", "anthropic"),
-    Secret("DATABRICKS_HOST", "databricks"),
-    Secret("DATABRICKS_HTTP_PATH", "databricks"),
-    Secret("DATABRICKS_TOKEN", "databricks"),
     Secret("MS_TENANT_ID", "graph"),
     Secret("MS_CLIENT_ID", "graph"),
     Secret("MS_CLIENT_SECRET", "graph"),
     Secret("MS_MAILBOX", "graph"),
     Secret("ALERT_EMAIL_TO", "graph"),
+    Secret("BRIEFING_RECIPIENTS", "briefing"),
+    Secret("BRIEFING_TEST_TO", "briefing", required=False),
     Secret("LINKEDIN_ACCESS_TOKEN", "linkedin", required=False),
     Secret("LINKEDIN_ORG_URN", "linkedin", required=False),
 )
@@ -65,60 +65,46 @@ def _check_anthropic() -> str:
     return f"key valid; models available: {', '.join(model_ids)}"
 
 
-def _check_databricks() -> str:
-    from ai_news.storage import databricks as db
-
-    settings = load_settings()
-    with db.connect(settings.databricks) as conn:
-        rows = db.execute(conn, "SELECT 1 AS ok, current_catalog(), current_user()")
-    _, catalog, user = rows[0]
-    return f"warehouse reachable as {user}; default catalog {catalog}"
-
-
-def _graph_token() -> str:
-    import msal
-
-    app = msal.ConfidentialClientApplication(
-        client_id=os.environ["MS_CLIENT_ID"],
-        client_credential=os.environ["MS_CLIENT_SECRET"],
-        authority=f"https://login.microsoftonline.com/{os.environ['MS_TENANT_ID']}",
-    )
-    result = app.acquire_token_for_client(scopes=["https://graph.microsoft.com/.default"])
-    if "access_token" not in result:
-        raise RuntimeError(f"token request failed: {result.get('error_description', result)}")
-    return result["access_token"]
-
-
 def _check_graph() -> str:
     import httpx
 
-    token = _graph_token()
-    headers = {"Authorization": f"Bearer {token}"}
-    mailbox = os.environ["MS_MAILBOX"]
-    url = f"{GRAPH}/users/{mailbox}/mailFolders/inbox/messages"
-    with httpx.Client(timeout=30, headers=headers) as client:
-        response = client.get(url, params={"$top": "1", "$select": "id,receivedDateTime"})
-        response.raise_for_status()
-        count = len(response.json().get("value", []))
-        note = f"read {mailbox} inbox ({count} message sampled)"
+    from ai_news.graph import GraphConfig, list_unread, token
 
-        probe = os.environ.get("MS_POLICY_PROBE_MAILBOX")
-        if probe:
+    config = GraphConfig.from_env()
+    token(config)  # raises with a clear message if the app credentials are wrong
+    messages = list_unread(config, top=1)
+    note = f"read {config.mailbox} inbox ({len(messages)} message sampled)"
+
+    probe = os.environ.get("MS_POLICY_PROBE_MAILBOX")
+    if probe:
+        with httpx.Client(timeout=30) as client:
             denied = client.get(
-                f"{GRAPH}/users/{probe}/mailFolders/inbox/messages", params={"$top": "1"}
+                f"{GRAPH}/users/{probe}/mailFolders/inbox/messages",
+                params={"$top": "1"},
+                headers={"Authorization": f"Bearer {token(config)}"},
             )
-            if denied.status_code == 200:
-                raise RuntimeError(
-                    f"app can read {probe}; the mailbox restriction is NOT in force"
-                )
-            note += f"; {probe} correctly denied ({denied.status_code})"
+        if denied.status_code == 200:
+            raise RuntimeError(f"app can read {probe}; the mailbox restriction is NOT in force")
+        note += f"; {probe} correctly denied ({denied.status_code})"
     return note
+
+
+def _check_briefing() -> str:
+    from ai_news.briefing.send import SendError, parse_recipients
+
+    settings = load_settings()
+    secret = settings.briefing.recipients_env
+    try:
+        recipients = parse_recipients(os.environ.get(secret, ""))
+    except SendError as exc:
+        raise RuntimeError(f"{secret}: {exc}") from exc
+    return f"client list valid: {len(recipients)} recipient(s)"
 
 
 LIVE: dict[str, Callable[[], str]] = {
     "anthropic": _check_anthropic,
-    "databricks": _check_databricks,
     "graph": _check_graph,
+    "briefing": _check_briefing,
 }
 
 
@@ -138,7 +124,7 @@ def main(argv: list[str] | None = None) -> int:
         elif secret.required:
             state, failed = "MISSING", True
         else:
-            state = "not set (optional until LinkedIn approves)"
+            state = "not set (optional)"
         print(f"{secret.name:24} {state}")
 
     if not args.live:

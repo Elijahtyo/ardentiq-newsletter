@@ -1,6 +1,6 @@
 # LinkedIn drafts
 
-The LinkedIn branch of the pipeline. It shares the news calls with the digest, and nothing else: **no draft, edit, approval or post ever goes into Databricks.**
+The LinkedIn branch of the pipeline. It shares the news calls with the briefing, and nothing else: **no draft, edit, approval or post goes into the briefing output or the state files.**
 
 ## Layout
 
@@ -22,9 +22,9 @@ Allowed moves are `draft → approved|rejected`, `approved → published|rejecte
 
 Publishing only ever reads `status: approved`. The ManualPublisher renders those to a text file for pasting; `LinkedInPublisher` (Phase 5) posts them and records `post_urn`.
 
-## Why files, not a table
+## Why files, not a database
 
-- Nothing commercial about posting passes through the Databricks Free Edition workspace.
 - Approval is a pull request, which gives a reviewable history for free.
-- The editor can fix a draft without a Databricks token.
+- The editor can fix a draft without any credentials.
 - The weekly voice-tuning task diffs `post_text` against `edited_text` straight from these files.
+- Drafts and client emails stay in separate places, so a briefing change cannot accidentally publish a post.

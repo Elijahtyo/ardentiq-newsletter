@@ -57,22 +57,6 @@ def repo_root() -> Path:
     return Path.cwd()
 
 
-class DatabricksSettings(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-
-    host: str = Field(description="Workspace URL, e.g. https://dbc-xxxx.cloud.databricks.com")
-    http_path: str = Field(description="SQL warehouse HTTP path, e.g. /sql/1.0/warehouses/abc123")
-    catalog: str = "main"
-    schema_name: str = Field(default="ai_news", alias="schema")
-    token_env: str = "DATABRICKS_TOKEN"
-
-    model_config = ConfigDict(extra="forbid", populate_by_name=True)
-
-    @property
-    def qualified_schema(self) -> str:
-        return f"{self.catalog}.{self.schema_name}"
-
-
 class ModelSettings(BaseModel):
     """Model choice per pipeline stage. Nothing model-related is hard-coded."""
 
@@ -122,6 +106,33 @@ class LinkedInSettings(BaseModel):
     published_file: str = "linkedin/published.jsonl"
 
 
+class BriefingSettings(BaseModel):
+    """The emailed briefing. Recipients come from a secret, never from this file."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    send_enabled: bool = False
+    subject_prefix: str = "AI briefing for UK SMEs"
+    footer: str = (
+        "You are receiving this briefing because you asked to be kept informed. "
+        "Reply to this email to change your preferences or to be removed."
+    )
+    out_dir: str = "briefing/out"
+    recipients_env: str = "BRIEFING_RECIPIENTS"
+    test_recipients_env: str = "BRIEFING_TEST_TO"
+    sender_name: str = "AI news briefing"
+
+
+class StateSettings(BaseModel):
+    """Where the run window and run log live, now that there is no warehouse."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    state_file: str = "state/pipeline_state.json"
+    runs_file: str = "state/runs.jsonl"
+    first_run_lookback_days: int = Field(default=3, ge=1, le=30)
+
+
 class HttpSettings(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -133,11 +144,12 @@ class HttpSettings(BaseModel):
 class Settings(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    databricks: DatabricksSettings
     models: ModelSettings
     schedule: ScheduleSettings = Field(default_factory=ScheduleSettings)
     pipeline: PipelineSettings = Field(default_factory=PipelineSettings)
     linkedin: LinkedInSettings = Field(default_factory=LinkedInSettings)
+    briefing: BriefingSettings = Field(default_factory=BriefingSettings)
+    state: StateSettings = Field(default_factory=StateSettings)
     http: HttpSettings = Field(default_factory=HttpSettings)
     sources_file: str = "config/sources.yaml"
 

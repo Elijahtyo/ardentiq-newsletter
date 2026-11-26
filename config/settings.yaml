@@ -1,12 +1,23 @@
 # Non-secret configuration. Secrets are referenced as ${ENV_VAR} and supplied by
 # GitHub Actions secrets at run time. Never put a token in this file.
 
-databricks:
-  host: ${DATABRICKS_HOST}
-  http_path: ${DATABRICKS_HTTP_PATH}
-  catalog: ${DATABRICKS_CATALOG:-main}
-  schema: ${DATABRICKS_SCHEMA:-ai_news}
-  token_env: DATABRICKS_TOKEN
+# No database. The digest is emailed to the client list; run state is kept in
+# the repository under state/. Recipients are a secret, never a config value.
+briefing:
+  send_enabled: false
+  subject_prefix: "AI briefing for UK SMEs"
+  footer: >-
+    You are receiving this briefing because you asked to be kept informed.
+    Reply to this email to change your preferences or to be removed.
+  out_dir: briefing/out
+  recipients_env: BRIEFING_RECIPIENTS
+  test_recipients_env: BRIEFING_TEST_TO
+  sender_name: "AI news briefing"
+
+state:
+  state_file: state/pipeline_state.json
+  runs_file: state/runs.jsonl
+  first_run_lookback_days: 3
 
 # Model ids live here, not in code. Change a model without touching Python.
 models:
@@ -35,7 +46,7 @@ linkedin:
   api_version: "202411"
   drafts_per_digest: 3
   hashtags_max: 3
-  # Drafts and their approval state live in the repository, never in Delta.
+  # Drafts and their approval state live in the repository.
   drafts_dir: linkedin/drafts
   published_file: linkedin/published.jsonl
 

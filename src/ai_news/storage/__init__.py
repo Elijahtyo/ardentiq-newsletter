@@ -1,1 +1,0 @@
-"""Databricks Delta storage."""

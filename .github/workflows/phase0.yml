@@ -12,17 +12,14 @@ jobs:
     timeout-minutes: 15
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-      DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
-      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-      DATABRICKS_CATALOG: ${{ vars.DATABRICKS_CATALOG }}
-      DATABRICKS_SCHEMA: ${{ vars.DATABRICKS_SCHEMA }}
       MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
       MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
       MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
       MS_MAILBOX: ${{ secrets.MS_MAILBOX }}
       MS_POLICY_PROBE_MAILBOX: ${{ vars.MS_POLICY_PROBE_MAILBOX }}
       ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+      BRIEFING_RECIPIENTS: ${{ secrets.BRIEFING_RECIPIENTS }}
+      BRIEFING_TEST_TO: ${{ secrets.BRIEFING_TEST_TO }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -36,5 +33,5 @@ jobs:
           pytest
       - name: Secrets present and working
         run: python -m ai_news.jobs.check_secrets --live
-      - name: Databricks test write
-        run: python -m ai_news.jobs.db_smoke
+      - name: Briefing renders
+        run: python -m ai_news.jobs.briefing_smoke --dry-run
