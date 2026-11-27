@@ -15,6 +15,12 @@ def test_recipients_are_not_required_while_sending_is_off() -> None:
     assert _required(settings)["BRIEFING_RECIPIENTS"] is False
 
 
+def test_alert_address_is_not_required_before_alerting_exists() -> None:
+    required = {secret.name for secret in SECRETS if secret.required}
+    assert "ALERT_EMAIL_TO" not in required
+    assert {"ANTHROPIC_API_KEY", "MS_MAILBOX", "MS_CLIENT_ID"} <= required
+
+
 def test_recipients_are_required_once_sending_is_on() -> None:
     settings = load_settings(environ={})
     settings.briefing.send_enabled = True

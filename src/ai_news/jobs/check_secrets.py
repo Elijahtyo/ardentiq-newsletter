@@ -42,7 +42,12 @@ SECRETS: tuple[Secret, ...] = (
     Secret("MS_CLIENT_ID", "graph"),
     Secret("MS_CLIENT_SECRET", "graph"),
     Secret("MS_MAILBOX", "graph"),
-    Secret("ALERT_EMAIL_TO", "graph"),
+    Secret(
+        "ALERT_EMAIL_TO",
+        "graph",
+        required=False,
+        note="needed once the missing-digest alert (check.yml) is built",
+    ),
     Secret(
         "BRIEFING_RECIPIENTS",
         "briefing",
