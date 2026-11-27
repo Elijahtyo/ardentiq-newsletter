@@ -33,6 +33,7 @@ class Secret:
     name: str
     group: str
     required: bool = True
+    note: str = ""
 
 
 SECRETS: tuple[Secret, ...] = (
@@ -42,11 +43,32 @@ SECRETS: tuple[Secret, ...] = (
     Secret("MS_CLIENT_SECRET", "graph"),
     Secret("MS_MAILBOX", "graph"),
     Secret("ALERT_EMAIL_TO", "graph"),
-    Secret("BRIEFING_RECIPIENTS", "briefing"),
-    Secret("BRIEFING_TEST_TO", "briefing", required=False),
+    Secret(
+        "BRIEFING_RECIPIENTS",
+        "briefing",
+        required=False,
+        note="needed only once briefing.send_enabled is true",
+    ),
+    Secret(
+        "BRIEFING_TEST_TO",
+        "briefing",
+        required=False,
+        note="optional; one address for the send test",
+    ),
     Secret("LINKEDIN_ACCESS_TOKEN", "linkedin", required=False),
     Secret("LINKEDIN_ORG_URN", "linkedin", required=False),
 )
+
+
+def _required(settings: object) -> dict[str, bool]:
+    """Which secrets must be present for *this* configuration.
+
+    The recipient list is only required once sending is switched on, so a gate
+    run does not fail simply because the client list is not finished yet.
+    """
+    briefing = getattr(settings, "briefing", None)
+    sending = bool(briefing and briefing.send_enabled)
+    return {"BRIEFING_RECIPIENTS": sending}
 
 
 def presence(environ: dict[str, str] | None = None) -> dict[str, bool]:
@@ -93,6 +115,8 @@ def _check_briefing() -> str:
     from ai_news.briefing.send import SendError, parse_recipients
 
     settings = load_settings()
+    if not settings.briefing.send_enabled:
+        return "sending is off (briefing.send_enabled is false); client list not checked"
     secret = settings.briefing.recipients_env
     try:
         recipients = parse_recipients(os.environ.get(secret, ""))
@@ -116,23 +140,40 @@ def main(argv: list[str] | None = None) -> int:
     configure_logging()
 
     present = presence()
+    settings = load_settings()
+    conditionally_required = _required(settings)
+
+    def is_required(secret: Secret) -> bool:
+        return conditionally_required.get(secret.name, secret.required)
+
     failed = False
+    missing: list[str] = []
     for secret in SECRETS:
-        ok = present[secret.name]
-        if ok:
+        if present[secret.name]:
             state = "set"
-        elif secret.required:
-            state, failed = "MISSING", True
+        elif is_required(secret):
+            state = "MISSING"
+            missing.append(secret.name)
+            failed = True
+        elif secret.note:
+            state = f"not set ({secret.note})"
         else:
             state = "not set (optional)"
         print(f"{secret.name:24} {state}")
 
+    if missing:
+        print()
+        print("Required secrets not set: " + ", ".join(missing))
+        print("Add them under Settings > Secrets and variables > Actions. See docs/SETUP.md.")
+
     if not args.live:
+        print()
+        print("GATE: missing required secrets" if failed else "GATE: all required secrets present")
         return 1 if failed else 0
 
     groups = list(LIVE) if not args.only else [g.strip() for g in args.only.split(",")]
     for group in groups:
-        needed = [s.name for s in SECRETS if s.group == group and s.required]
+        needed = [s.name for s in SECRETS if s.group == group and is_required(s)]
         if not all(present[name] for name in needed):
             print(f"[{group}] skipped: secrets missing")
             failed = True
@@ -144,6 +185,8 @@ def main(argv: list[str] | None = None) -> int:
             print(f"[{group}] FAILED: {type(exc).__name__}: {exc}")
             log.error("check_secrets.failed", extra={"group": group, "error": str(exc)})
     print("[linkedin] skipped: publishing not enabled until API approval")
+    print()
+    print("GATE: FAILED, see the lines above" if failed else "GATE: PASSED")
     return 1 if failed else 0
 
 
